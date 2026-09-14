@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mediafix"
+version = "0.1.0"
+description = "Конвертер аудио в PCM для видео DaVinci Resolve"
+requires-python = ">=3.10"
+
+[project.scripts]
+mediafix = "mediafix:main"
+
+[tool.setuptools]
+py-modules = ["mediafix"]
