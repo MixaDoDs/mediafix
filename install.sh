@@ -17,19 +17,41 @@ EOF
 cat > "$bin_dir/mediafix-terminal" <<EOF
 #!/bin/bash
 set +e
-mediafix "\$@"
+"$bin_dir/mediafix" "\$@"
 status=\$?
 printf '\\nГотово. Это окно закроется через 5 секунд. Нажмите любую клавишу, чтобы закрыть его сразу.\\n'
 IFS= read -r -n 1 -t 5 _
 exit "\$status"
 EOF
+cat > "$bin_dir/mediafix-open-terminal" <<EOF
+#!/bin/bash
+set -u
+if [ -x "\$HOME/.local/bin/kitty" ]; then
+    exec "\$HOME/.local/bin/kitty" "$bin_dir/mediafix-terminal" "\$@"
+elif command -v kitty >/dev/null 2>&1; then
+    exec kitty "$bin_dir/mediafix-terminal" "\$@"
+elif command -v alacritty >/dev/null 2>&1; then
+    exec alacritty -e "$bin_dir/mediafix-terminal" "\$@"
+elif command -v gnome-terminal >/dev/null 2>&1; then
+    exec gnome-terminal -- "$bin_dir/mediafix-terminal" "\$@"
+elif command -v konsole >/dev/null 2>&1; then
+    exec konsole -e "$bin_dir/mediafix-terminal" "\$@"
+elif command -v foot >/dev/null 2>&1; then
+    exec foot "$bin_dir/mediafix-terminal" "\$@"
+elif command -v xterm >/dev/null 2>&1; then
+    exec xterm -e "$bin_dir/mediafix-terminal" "\$@"
+else
+    echo "Не найден терминал. Установите kitty или alacritty."
+    exit 1
+fi
+EOF
 cat > "$nautilus_dir/Prepare with mediafix" <<EOF
 #!/bin/bash
-exec "$install_dir/mediafix-nautilus" "\$@"
+exec "$bin_dir/mediafix-open-terminal" "\$@"
 EOF
-install -m 755 "$repo_dir/mediafix-nautilus" "$install_dir/mediafix-nautilus"
 install -m 644 "$repo_dir/mediafix-dolphin.desktop" "$dolphin_dir/mediafix.desktop"
-chmod 755 "$bin_dir/mediafix" "$bin_dir/mediafix-terminal" "$nautilus_dir/Prepare with mediafix"
+sed -i "s|Exec=.*|Exec=$bin_dir/mediafix-open-terminal %F|" "$dolphin_dir/mediafix.desktop"
+chmod 755 "$bin_dir/mediafix" "$bin_dir/mediafix-terminal" "$bin_dir/mediafix-open-terminal" "$nautilus_dir/Prepare with mediafix"
 
 echo "mediafix установлен: $bin_dir/mediafix"
 echo "Nautilus: контекстное меню → Scripts → Prepare with mediafix"

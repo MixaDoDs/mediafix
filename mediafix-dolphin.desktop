@@ -9,5 +9,5 @@ X-KDE-Priority=TopLevel
 Name=Prepare for DaVinci Resolve (mediafix)
 Name[ru]=Подготовить для DaVinci Resolve (mediafix)
 Icon=video-x-generic
-Exec=mediafix-terminal %F
-Terminal=true
+Exec=mediafix-open-terminal %F
+Terminal=false

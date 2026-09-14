@@ -41,6 +41,8 @@ It also adds file-manager actions:
 
 The action opens a terminal, passes all selected files to one queue, and shows the final report. The terminal closes after five seconds or immediately when a key is pressed. Restart Nautilus or Dolphin if the new menu item does not appear immediately.
 
+The launcher supports Kitty, Alacritty, GNOME Terminal, Konsole, foot, and xterm.
+
 ## Run
 
 ```bash
