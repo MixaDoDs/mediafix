@@ -1,0 +1,18 @@
+#!/bin/bash
+set -u
+terminal=''
+if command -v gnome-terminal >/dev/null 2>&1; then
+    terminal=(gnome-terminal --)
+elif command -v kgx >/dev/null 2>&1; then
+    terminal=(kgx --)
+elif command -v konsole >/dev/null 2>&1; then
+    terminal=(konsole -e)
+elif command -v xfce4-terminal >/dev/null 2>&1; then
+    terminal=(xfce4-terminal -e)
+elif command -v xterm >/dev/null 2>&1; then
+    terminal=(xterm -e)
+else
+    printf '%s\n' 'Не найден терминал: установите gnome-terminal, konsole или xterm.' >&2
+    exit 1
+fi
+exec "${terminal[@]}" mediafix-terminal "$@"

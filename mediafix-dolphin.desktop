@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=video/*;
+Actions=prepare;
+X-KDE-Priority=TopLevel
+
+[Desktop Action prepare]
+Name=Prepare for DaVinci Resolve (mediafix)
+Name[ru]=Подготовить для DaVinci Resolve (mediafix)
+Icon=video-x-generic
+Exec=mediafix-terminal %F
+Terminal=true

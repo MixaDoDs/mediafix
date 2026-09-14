@@ -1,0 +1,7 @@
+#!/bin/bash
+set +e
+mediafix "$@"
+status=$?
+printf '\nГотово. Это окно закроется через 5 секунд. Нажмите любую клавишу, чтобы закрыть его сразу.\n'
+IFS= read -r -n 1 -t 5 _
+exit "$status"
