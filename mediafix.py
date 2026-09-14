@@ -293,11 +293,14 @@ def process(files: list[Path]) -> int:
 
 
 def main() -> int:
-    require_tools(); args = parse_args()
-    files = [p for p in args.files] if args.files else browse()
-    if not files:
-        print("Файлы не выбраны."); return 0
-    try: return process(files)
+    try:
+        require_tools()
+        args = parse_args()
+        files = [p for p in args.files] if args.files else browse()
+        if not files:
+            print("Файлы не выбраны.")
+            return 0
+        return process(files)
     except KeyboardInterrupt:
         print("\nОстановлено. Незавершённый временный файл удалён.")
         return 130
