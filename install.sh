@@ -5,9 +5,10 @@ repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 install_dir="${XDG_DATA_HOME:-$HOME/.local/share}/mediafix"
 bin_dir="${XDG_BIN_HOME:-$HOME/.local/bin}"
 nautilus_dir="${XDG_DATA_HOME:-$HOME/.local/share}/nautilus/scripts"
+nautilus_ext_dir="${XDG_DATA_HOME:-$HOME/.local/share}/nautilus-python/extensions"
 dolphin_dir="${XDG_DATA_HOME:-$HOME/.local/share}/kservices5/ServiceMenus"
 
-mkdir -p "$install_dir" "$bin_dir" "$nautilus_dir" "$dolphin_dir"
+mkdir -p "$install_dir" "$bin_dir" "$nautilus_dir" "$nautilus_ext_dir" "$dolphin_dir"
 install -m 755 "$repo_dir/mediafix.py" "$install_dir/mediafix.py"
 
 cat > "$bin_dir/mediafix" <<EOF
@@ -49,12 +50,13 @@ cat > "$nautilus_dir/Prepare with mediafix" <<EOF
 #!/bin/bash
 exec "$bin_dir/mediafix-open-terminal" "\$@"
 EOF
+install -m 644 "$repo_dir/mediafix-nautilus-extension.py" "$nautilus_ext_dir/mediafix.py"
 install -m 644 "$repo_dir/mediafix-dolphin.desktop" "$dolphin_dir/mediafix.desktop"
 sed -i "s|Exec=.*|Exec=$bin_dir/mediafix-open-terminal %F|" "$dolphin_dir/mediafix.desktop"
 chmod 755 "$bin_dir/mediafix" "$bin_dir/mediafix-terminal" "$bin_dir/mediafix-open-terminal" "$nautilus_dir/Prepare with mediafix"
 
 echo "mediafix установлен: $bin_dir/mediafix"
-echo "Nautilus: контекстное меню → Scripts → Prepare with mediafix"
+echo "Nautilus: контекстное меню → Подготовить для DaVinci Resolve (mediafix)"
 echo "Dolphin: контекстное меню → Prepare for DaVinci Resolve (mediafix)"
 case ":${PATH:-}:" in
   *:"$bin_dir":*) ;;

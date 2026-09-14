@@ -36,12 +36,12 @@ The installer copies one Python file and creates `mediafix` in `~/.local/bin`. I
 
 It also adds file-manager actions:
 
-- Nautilus: right-click selected videos → `Scripts` → `Prepare with mediafix`.
+- Nautilus: right-click selected videos → `Prepare for DaVinci Resolve (mediafix)`.
 - Dolphin: right-click selected videos → `Prepare for DaVinci Resolve (mediafix)`.
 
 The action opens a terminal, passes all selected files to one queue, and shows the final report. The terminal closes after five seconds or immediately when a key is pressed. Restart Nautilus or Dolphin if the new menu item does not appear immediately.
 
-The launcher supports Kitty, Alacritty, GNOME Terminal, Konsole, foot, and xterm.
+The Nautilus item is a top-level context-menu action provided by a Nautilus extension. The launcher supports Kitty, Alacritty, GNOME Terminal, Konsole, foot, and xterm.
 
 ## Run
 

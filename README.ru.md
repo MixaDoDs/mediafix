@@ -36,12 +36,12 @@ export PATH="$HOME/.local/bin:$PATH"
 
 Установщик также добавляет пункты в файловые менеджеры:
 
-- Nautilus: правой кнопкой по выбранным видео → `Scripts` → `Prepare with mediafix`;
+- Nautilus: правой кнопкой по выбранным видео → `Подготовить для DaVinci Resolve (mediafix)`;
 - Dolphin: правой кнопкой по выбранным видео → `Подготовить для DaVinci Resolve (mediafix)`.
 
 Откроется терминал, все выбранные файлы попадут в одну очередь, а после отчёта окно закроется через 5 секунд или сразу после нажатия любой клавиши. Если пункт не появился, перезапустите Nautilus или Dolphin.
 
-Поддерживаются Kitty, Alacritty, GNOME Terminal, Konsole, foot и xterm.
+Пункт Nautilus находится прямо в контекстном меню и добавляется расширением Nautilus. Поддерживаются Kitty, Alacritty, GNOME Terminal, Konsole, foot и xterm.
 
 ## Запуск
 
